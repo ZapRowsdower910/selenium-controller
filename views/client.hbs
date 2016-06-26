@@ -1,0 +1,25 @@
+{{> seleniumStatus}}
+
+<p>Client test</p>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect();
+  socket.on('connect', function () {
+    $('#socket-status')
+      .removeClass('text-danger text-warning')
+      .addClass('text-success');
+  });
+  
+  socket.on('disconnect reconnect_error', function(){
+    $('#socket-status')
+      .removeClass('text-success  text-warning')
+      .addClass('text-danger');
+  });
+  
+  socket.on('reconnecting', function(){
+    $('#socket-status')
+      .removeClass('text-success  text-danger')
+      .addClass('text-warning');
+  });
+</script>
